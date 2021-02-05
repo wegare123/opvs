@@ -44,10 +44,11 @@ echo "contoh : auth-user-pass /root/akun/pass-opvs.txt"
 echo "edit remote menjadi remote 127.0.0.1 6969"
 echo "contoh : remote $host $port menjadi remote 127.0.0.1 6969"
 echo "tambahkan dibawah remote: route $host 255.255.255.255 net_gateway"
-echo "lalu masukkan config kedalam direktori openwrt"
+echo "lalu masukkan config kedalam direktori root openwrt"
 echo ""
-echo "Masukkan direktori config ovpn : " 
-read -p "default direktori config ovpn: $openvpn2 : " openvpn
+echo "Masukkan nama config ovpn" 
+echo "contoh wegare.ovpn" 
+read -p "default nama config ovpn: $openvpn2 : " openvpn
 [ -z "${openvpn}" ] && openvpn="$openvpn2"
 
 echo "[VPN]
@@ -67,7 +68,8 @@ sleep 2
 clear
 /usr/bin/opvs
 elif [ "${tools}" = "2" ]; then
-opvpn="$(cat /root/akun/opvs.txt | grep -i direkopvpn | cut -d= -f2 | head -n1)" 
+opvpn3="$(cat /root/akun/opvs.txt | grep -i direkopvpn | cut -d= -f2 | head -n1)" 
+opvpn=$(find /root -name $opvpn3)
 stunnel /root/akun/openssl.conf > /dev/null &
 sleep 3
 openvpn $opvpn &
