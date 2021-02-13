@@ -73,6 +73,7 @@ opvpn=$(find /root -name $opvpn3)
 stunnel /root/akun/openssl.conf > /dev/null &
 sleep 3
 openvpn $opvpn &
+fping -l google.com > /dev/null 2>&1 &
 elif [ "${tools}" = "3" ]; then
 killall -q openvpn stunnel dnsmasq 
 /etc/init.d/dnsmasq start > /dev/null

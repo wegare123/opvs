@@ -2,7 +2,7 @@
 #opvs (Wegare)
 wget --no-check-certificate "https://raw.githubusercontent.com/wegare123/opvs/main/opvs.sh" -O /usr/bin/opvs
 wget --no-check-certificate "https://raw.githubusercontent.com/wegare123/opvs/main/autorekonek-opvs.sh" -O /usr/bin/autorekonek-opvs
-opkg update && opkg install lsof openvpn-openssl stunnel
+opkg update && opkg install lsof openvpn-openssl stunnel fping
 chmod +x /usr/bin/opvs
 chmod +x /usr/bin/autorekonek-opvs
 rm -r ~/install.sh
