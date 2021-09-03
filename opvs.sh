@@ -1,5 +1,9 @@
 #!/bin/bash
 #opvs (Wegare)
+stop () {
+killall -q openvpn stunnel fping
+/etc/init.d/dnsmasq restart 2>/dev/null
+}
 user2="$(cat /root/akun/pass-opvs.txt | awk 'NR==1')" 
 host2="$(cat /root/akun/opvs.txt | grep -i host | cut -d= -f2 | head -n1)"
 port2="$(cat /root/akun/opvs.txt | grep -i port | cut -d= -f2 | head -n1)" 
@@ -68,6 +72,7 @@ sleep 2
 clear
 /usr/bin/opvs
 elif [ "${tools}" = "2" ]; then
+stop
 opvpn3="$(cat /root/akun/opvs.txt | grep -i direkopvpn | cut -d= -f2 | head -n1)" 
 opvpn=$(find /root -name $opvpn3)
 stunnel /root/akun/openssl.conf > /dev/null &
@@ -75,8 +80,7 @@ sleep 3
 openvpn $opvpn &
 fping -l google.com > /dev/null 2>&1 &
 elif [ "${tools}" = "3" ]; then
-killall -q openvpn stunnel dnsmasq fping
-/etc/init.d/dnsmasq start > /dev/null
+stop
 echo "Stop Suksess"
 sleep 2
 clear
